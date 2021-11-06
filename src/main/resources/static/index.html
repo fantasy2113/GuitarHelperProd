@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Guitar(helper) 1.7</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="expires" content="43200">
+    <meta http-equiv="cache-control" content="max-age=43200" />
+    <meta name="description" content="Free Web-App">
+    <meta name="keywords" content="Guitar,Fretboard,Guitar Fretboard, pentatonic, chords, scale, scales">
+    <meta name="author" content="Julian Osmer">
+    <link rel="apple-touch-icon" sizes="57x57" href="apple-icon-57x57.png" />
+    <link rel="apple-touch-icon" sizes="60x60" href="apple-icon-60x60.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="apple-icon-72x72.png" />
+    <link rel="apple-touch-icon" sizes="76x76" href="apple-icon-76x76.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="apple-icon-114x114.png" />
+    <link rel="apple-touch-icon" sizes="120x120" href="apple-icon-120x120.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="apple-icon-144x144.png" />
+    <link rel="apple-touch-icon" sizes="152x152" href="apple-icon-152x152.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-icon-180x180.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="android-icon-192x192.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+    <link rel="manifest" href="manifest.json" />
+    <meta name="msapplication-TileColor" content="#ffffff" />
+    <meta name="msapplication-TileImage" content="ms-icon-144x144.png" />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="stylesheet" href="css/jquery-ui.min.css?version=5" />
+    <link rel="stylesheet" href="css/style.css?version=4">
+    <link rel="stylesheet" href="css/fieldset.css?version=6" />
+    <link rel="stylesheet" href="css/jquery-ui.structure.min.css?version=1" />
+    <link rel="stylesheet" href="css/jquery-ui.theme.min.css?version=1" />
+    <script src="js/jquery-3.6.0.min.js" language="javascript" type="text/javascript"></script>
+    <script src="js/jquery-ui.min.js" language="javascript" type="text/javascript"></script>
+    <script src="js/app.js?version=60" language="javascript" type="text/javascript"></script>
+</head>
+<body bgcolor="#FFFFFF">
+<div class="demo">
+    <form action="#">
+        <fieldset>
+            <select name="tunings" id="tunings" title="Select number of strings and tuning."></select>
+            <select name="frets" id="frets" title="Select number of frets."></select>
+            <input type="button" value="Clear"
+                   style="height:31px;width:70px;font-size:17px;border:solid;border-radius:3px;border-width:1px;border-color:#C5C5C5;background-color:#F6F6F6;"
+                   onclick="clearFretboard();"
+                   title="Click to clear." />
+            <br>
+            <select name="key" id="key" title="Select keynote."></select>
+            <select name="scales" id="scales" title="Select a scale, pentatonic or chord."></select>
+            <input type="button" value="Reset"
+                   style="height:31px;width:70px;font-size:17px;border:solid;border-radius:3px;border-width:1px;border-color:#C5C5C5;background-color:#F6F6F6;"
+                   onclick="resetFretboard();"
+                   title="Click to reset." />
+        </fieldset>
+    </form>
+    <form id="fretboard">
+        <div id="fretsButtons">
+        </div>
+        <div id="pageButtons">
+        </div>
+        <p></p>
+        <div id="legendButtons">
+        </div>
+        <p></p>
+        <div id="matchingChords">
+        </div>
+        <div id="found">
+        </div>
+    </form>
+    <form id="info"></form>
+</div>
+</body>
+</html>
