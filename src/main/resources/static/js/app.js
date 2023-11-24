@@ -622,21 +622,18 @@ $(function () {
     setCookie(scalesArrVal.indexOf(currentScale), tuningsArrVal.indexOf(currentTuning), FRET_WIRES_ARR.indexOf(currentFrets), savedTones, KEYTONES_ARR.indexOf(keytone));
     updateProgram();
     initRestoreSavedTones();
-    foundScales();
   });
   $('#tunings').on('selectmenuchange', function () {
     currentTuning = TUNING_MAP[this.value];
     setCookie(scalesArrVal.indexOf(currentScale), tuningsArrVal.indexOf(currentTuning), FRET_WIRES_ARR.indexOf(currentFrets), savedTones, KEYTONES_ARR.indexOf(keytone));
     updateProgram();
     initRestoreSavedTones();
-    foundScales();
   });
   $('#scales').on('selectmenuchange', function () {
     currentScale = SCALES_MAP[this.value];
     savedTones = [];
     setCookie(scalesArrVal.indexOf(currentScale), tuningsArrVal.indexOf(currentTuning), FRET_WIRES_ARR.indexOf(currentFrets), savedTones, KEYTONES_ARR.indexOf(keytone));
     updateScale();
-    foundScales();
   });
   $('#key').on('selectmenuchange', function () {
     keytone = this.value;
@@ -662,7 +659,6 @@ $(function () {
       initScalesStart();
       initScalesEnd();
     }
-    foundScales();
     setCookie(scalesArrVal.indexOf(currentScale), tuningsArrVal.indexOf(currentTuning), FRET_WIRES_ARR.indexOf(currentFrets), savedTones, KEYTONES_ARR.indexOf(keytone));
   });
 
@@ -680,60 +676,7 @@ $(function () {
       }
     });
   });
-  $('#info').html('<p></p><font size="3"><strong>Source: </strong><a href="https://github.com/nuggetNascher/GuitarHelperWebVS"><i>https://github.com/nuggetNascher/GuitarHelperWebVS</i></a><br><strong>Info: </strong><i>This site uses cookies and all information is without guarantee of correctness and completeness.</i><br><strong>Contact: </strong><i>vpick87@gmail.com</i></font>');
 });
-
-
-function foundScales() {
-  $('#found').html('');
-  if (savedTones !== undefined && savedTones.length >= 3 && savedTones.length <= 7 && isClickAllowed) {
-    var foundScales = getfoundScales(savedTones, false);
-    foundScales = foundScales.replace('*', '');
-    if (foundScales !== '') {
-      $('#found').html('<font size="3"><strong>Tones included in:</strong><br>' + foundScales + '</font>');
-    }
-  } else {
-    $('#found').html('');
-  }
-}
-
-function getfoundScales(list, isFromScale) {
-  var retVal = '<table><tr>';
-  var foundKeys = [];
-  var br = 5;
-  var trCnt = 0;
-  if (isFromScale) {
-    br++;
-  }
-  for (var key in SCALES_MAP) {
-    var cnt = 0;
-    var tmpScale = SCALES_MAP[key];
-    for (var i = 0; i < list.length; i++) {
-      for (var j = 0; j < tmpScale.length; j++) {
-        if (list[i] === tmpScale[j]) {
-          cnt++;
-        }
-      }
-    }
-    if (cnt === list.length && !foundKeys.includes(key)) {
-      if (trCnt >= br) {
-        retVal += '</tr><tr>';
-        trCnt = 0;
-      }
-      if (isFromScale && tmpScale.length === list.length && list !== tmpScale) {
-        retVal += '<th>' + key + '</th>';
-        foundKeys.push(key);
-        trCnt++;
-      } else if (!isFromScale) {
-        retVal += '<th>' + key + '</th>';
-        foundKeys.push(key);
-        trCnt++;
-      }
-    }
-  }
-  retVal += '*';
-  return retVal.replace('</th>*', '</th></tr>') + '</table>';
-}
 
 function isContains(note, myArray) {
   var retVal = false;
@@ -775,147 +718,6 @@ function getNewKeyTone(retVal) {
   return newRetVal;
 }
 
-function setMatchingChords(scaleIndex) {
-  var msg = '';
-  var steps = '';
-  var name = '';
-  if (scaleIndex > 0) {
-    if (scalesArr[scaleIndex].includes('Chord')) {
-      name = scalesArr[scaleIndex];
-      if (name.includes('Major') | name.includes('Minor') && !name.includes('7') && !name.includes('9') && !name.includes('6') && !name.includes('Slash')) {
-        name = name.replace('Chord', 'Scale');
-        if (name.includes('Major')) {
-          steps = getSteps(SCALES_MAP[name], MAJOR_STEPS_DICT, name);
-        } else if (name.includes('Minor')) {
-          steps = getSteps(SCALES_MAP[name], MINOR_STEPS_DICT, name);
-        }
-      } else {
-        steps = getfoundChords(SCALES_MAP[name], name);
-      }
-      if (steps.length > 4) {
-        msg = '<font size="3"><strong>Possible Backingtrack content:</strong><br>' + steps + '</font >';
-      }
-    } else {
-      name = scalesArr[scaleIndex];
-      var scale = SCALES_MAP[name];
-      var foundScale = getfoundScales(scale, true).replace('*', '');
-      if (name.includes('Pentatonic')) {
-        name = name.replace('Pentatonic', 'Scale');
-        scale = SCALES_MAP[name];
-      }
-      if (foundScale.includes('</tr>')) {
-        foundScale = '<br>' + foundScale;
-      } else {
-        foundScale = '';
-      }
-      steps = getfoundChords(scale, name);
-      msg = '<font size="3"><strong>Possible Backingtrack content:</strong><br>' + steps + foundScale + '</font >';
-    }
-  } else {
-    msg = '';
-  }
-  $('#matchingChords').html(msg);
-}
-
-function getSteps(scale, stepsDict, name) {
-  var retVal = '';
-  if (Object.keys(stepsDict).length === 7) {
-    if (scale.length === 7) {
-      for (var i = 0; i < 7; i++) {
-        retVal += '<strong>' + STEPS[i] + ':</strong> ' + scale[i] + ' ' + stepsDict[STEPS[i]] + ' ';
-      }
-    }
-    return retVal;
-  } else {
-    return '';
-  }
-}
-
-function getStepStr(scale, name, steps) {
-  if (steps === '') {
-    return getfoundChords(scale, name);
-  } else {
-    return steps + '<br>' + getfoundChords(scale, name);
-  }
-}
-
-function getfoundChords(list) {
-  var foundKeys = [];
-  var cnt = 0;
-  for (var key in SCALES_MAP) {
-    if (key.includes('Chord')) {
-      cnt = 0;
-      var tmpChord = SCALES_MAP[key];
-      for (var i = 0; i < list.length; i++) {
-        for (var j = 0; j < list.length; j++) {
-          if (list[i] === tmpChord[j]) {
-            cnt++;
-          }
-        }
-      }
-      if (cnt === tmpChord.length && !foundKeys.includes(key) && list !== tmpChord) {
-        foundKeys.push(key.replace('Chord', ''));
-      }
-    }
-  }
-  return getTable(list, foundKeys);
-}
-
-function getTable(list, foundKeys) {
-  var retVal = '<div style="overflow-x:auto;"><table>';
-  const MAX_CELLS = getMaxCells(list, foundKeys);
-  for (var i = 0; i < list.length; i++) {
-    var cnt = 0;
-    retVal += '<tr>';
-    if (list.length === 7) {
-      retVal += '<th>' + STEPS[i] + '</th>';
-    }
-    for (var k = 0; k < foundKeys.length; k++) {
-      if (list[i].length === 1) {
-        if (foundKeys[k].charAt(0) === list[i] && foundKeys[k].charAt(1) === ' ') {
-          retVal += '<th>' + foundKeys[k] + '</th>';
-          cnt++;
-        }
-      } else {
-        if (foundKeys[k].includes(list[i])) {
-          retVal += '<th>' + foundKeys[k] + '</th>';
-          cnt++;
-        }
-      }
-    }
-    if (cnt > 0) {
-      for (var j = cnt; j < MAX_CELLS; j++) {
-        retVal += '<th>-</th>';
-      }
-    }
-    retVal += '</tr>';
-  }
-  retVal += '</table></div>';
-  return retVal;
-}
-
-function getMaxCells(list, foundKeys) {
-  var result = 0;
-  for (var i = 0; i < list.length; i++) {
-    var cnt = 0;
-    for (var k = 0; k < foundKeys.length; k++) {
-      if (list[i].length === 1) {
-        if (foundKeys[k].charAt(0) === list[i] && foundKeys[k].charAt(1) === ' ') {
-          cnt++;
-        }
-      } else {
-        if (foundKeys[k].includes(list[i])) {
-          cnt++;
-        }
-      }
-    }
-    if (result < cnt) {
-      result = cnt;
-    }
-  }
-  return result;
-}
-
 function setBtnEvent() {
   for (var i = 0; i < btnIdArr.length; i++) {
     document.getElementById(btnIdArr[i]).onclick = clickButton;
@@ -937,7 +739,6 @@ function setCookie(scaleIndex, tuningsIndex, fretsIndex, savedTones, keytoneInde
     }
   }
   document.cookie = sb.join().toString();
-  setMatchingChords(scaleIndex);
 }
 
 function setColor(btnId, note) {
@@ -1013,7 +814,6 @@ function initGlobal() {
     initDefault();
     initSavedToneFromCookie(cookies);
     initRestoreSavedTones();
-    foundScales();
   } else {
     initGUISearchPanels(0, 3, 0, 0);
     initDefault();
@@ -1070,7 +870,6 @@ function initGUISearchPanels(scaleIndex, tuningsIndex, fretsIndex, keytoneIndex)
   currentFrets = FRET_WIRES_ARR[fretsIndex];
   currentScale = SCALES_MAP[scalesArr[scaleIndex]];
   keytone = KEYTONES_ARR[keytoneIndex];
-  setMatchingChords(scaleIndex);
 }
 
 function initSavedToneFromCookie(cookies) {
@@ -1254,8 +1053,6 @@ function clearFretboard() {
   $('#key').val('No keytone');
   $('#key').selectmenu('refresh');
   savedTones = [];
-  $('#matchingChords').html('');
-  $('#found').html('');
   setCookie(0, tuningsArrVal.indexOf(currentTuning), FRET_WIRES_ARR.indexOf(currentFrets), savedTones, KEYTONES_ARR.indexOf(keytone));
 }
 
@@ -1282,7 +1079,6 @@ function clickButton(e) {
     updateButton(target, '');
   }
   setCookie(scalesArrVal.indexOf(currentScale), tuningsArrVal.indexOf(currentTuning), FRET_WIRES_ARR.indexOf(currentFrets), savedTones, KEYTONES_ARR.indexOf(keytone));
-  foundScales();
 }
 
 function createFretBoard() {
