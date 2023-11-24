@@ -25,10 +25,8 @@ const CHORD7_COLOR_ARR = ['#FFFF00', '#D7EE53', '#AFDEA6', '#87CEFA'];
 const CHORD_COLOR_ARR = ['#FFFF00', '#C3E67D', '#87CEFA'];
 const CHORD5_COLOR_ARR = ['#FFFF00', '#87CEFA'];
 
-// asp.net generated content - start
 const MAX_NOTE_LEN = 5;
 const FRET_WIRES_ARR = ["12", "18", "21", "22", "24", "27"];
-const STEPS = ["I", "II", "III", "IV", "V", "VI", "VII"];
 
 const A = "A";
 const B_FLAT = "A#/Bb";
@@ -42,70 +40,6 @@ const F = "F";
 const F_SHARP = "F#/Gb";
 const G = "G";
 const G_SHARP = "G#/Ab";
-
-const MAJOR_STEPS_DICT = {
-  "I" : "Major",
-  "II" : "Minor",
-  "III" : "Minor",
-  "IV" : "Major",
-  "V" : "Major",
-  "VI" : "Minor",
-  "VII" : "Dim"
-};
-
-const MINOR_STEPS_DICT = {
-  "I" : "Minor",
-  "II" : "Dim",
-  "III" : "Major",
-  "IV" : "Minor",
-  "V" : "Minor",
-  "VI" : "Major",
-  "VII" : "Major"
-};
-
-const HARMONIC_STEPS_DICT = {
-  "I" : "Minor",
-  "II" : "Dim",
-  "III" : "Aug",
-  "IV" : "Minor",
-  "V" : "Major",
-  "VI" : "Major",
-  "VII" : "Dim"
-};
-
-const MELODIC_STEPS_DICT = {
-  "I" : "Minor",
-  "II" : "Minor",
-  "III" : "Aug",
-  "IV" : "Major",
-  "V" : "Major",
-  "VI" : "Dim",
-  "VII" : "Dim"
-};
-
-const PY_DOM_STEPS_DICT = {
-};
-
-const PY_STEPS_DICT = {
-};
-
-const MIXLYDIAN_STEPS_DICT = {
-};
-
-const LYDIAN_STEPS_DICT = {
-};
-
-const DORIC_STEPS_DICT = {
-};
-
-const HUNGARIAN_STEPS_DICT = {
-};
-
-const ARABIC_STEPS_DICT = {
-};
-
-const BLUES_STEPS_DICT = {
-};
 
 const TONES_ARR = [A,B_FLAT,B,C,C_SHARP,D,D_SHARP,E,F,F_SHARP,G,G_SHARP];
 
@@ -584,23 +518,21 @@ const SCALES_MAP = {
 };
 
 const TUNING_MAP = {
-  "4. E A D g": [G,D,A,E],
-  "4. G C A e": [E,A,C,G],
-  "5. B E A D g": [G,D,A,E,B],
-  "6. E A D G B e": [E,B,G,D,A,E],
-  "6. D A D G B e": [E,B,G,D,A,D],
-  "6. C G C F A d": [D,A,F,C,G,C],
-  "6. D G D G B d": [D,B,G,D,G,D],
-  "6. C# G# C# F# Bb d#": [D_SHARP,B_FLAT,F_SHARP,C_SHARP,G_SHARP,C_SHARP],
-  "6. D# G# C# F# Bb d#": [D_SHARP,B_FLAT,F_SHARP,C_SHARP,G_SHARP,D_SHARP],
-  "7. B E A D G B e": [E,B,G,D,A,E,B],
-  "7. A E A D G B e": [E,B,G,D,A,E,A],
-  "8. F# B E A D G B e": [E,B,G,D,A,E,B,F_SHARP],
-  "8. G D G C F Bb D g": [G,D,B_FLAT,F,C,G,D,G],
-  "9. C# F# B E A D G B e": [E,B,G,D,A,E,B,F_SHARP,C_SHARP]
+  "E A D g": [G,D,A,E],
+  "G C A e": [E,A,C,G],
+  "B E A D g": [G,D,A,E,B],
+  "E A D G B e": [E,B,G,D,A,E],
+  "D A D G B e": [E,B,G,D,A,D],
+  "C G C F A d": [D,A,F,C,G,C],
+  "D G D G B d": [D,B,G,D,G,D],
+  "C# G# C# F# Bb d#": [D_SHARP,B_FLAT,F_SHARP,C_SHARP,G_SHARP,C_SHARP],
+  "D# G# C# F# Bb d#": [D_SHARP,B_FLAT,F_SHARP,C_SHARP,G_SHARP,D_SHARP],
+  "B E A D G B e": [E,B,G,D,A,E,B],
+  "A E A D G B e": [E,B,G,D,A,E,A],
+  "F# B E A D G B e": [E,B,G,D,A,E,B,F_SHARP],
+  "G D G C F Bb D g": [G,D,B_FLAT,F,C,G,D,G],
+  "C# F# B E A D G B e": [E,B,G,D,A,E,B,F_SHARP,C_SHARP]
 }
-
-// asp.net generated content - end
 
 $(function () {
   scalesArr = Object.keys(SCALES_MAP);
@@ -660,21 +592,6 @@ $(function () {
       initScalesEnd();
     }
     setCookie(scalesArrVal.indexOf(currentScale), tuningsArrVal.indexOf(currentTuning), FRET_WIRES_ARR.indexOf(currentFrets), savedTones, KEYTONES_ARR.indexOf(keytone));
-  });
-
-  $(document).ready(function () {
-    var du = 1500;
-    $(document).tooltip({
-      show: {
-        effect: 'slideDown'
-      },
-      track: true,
-      open: function (event, ui) {
-        setTimeout(function () {
-          $(ui.tooltip).hide();
-        }, du);
-      }
-    });
   });
 });
 
