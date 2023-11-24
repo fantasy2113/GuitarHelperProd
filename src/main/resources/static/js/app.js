@@ -1,18 +1,19 @@
 'use strict';
-var btnIdArr = [];
-var strBtnId = [];
-var currentTuning = [];
-var currentScale = [];
-var scalesArr = [];
-var tuningsArr = [];
-var scalesArrVal = [];
-var tuningsArrVal = [];
-var fretBoard = [[]];
-var savedTones = [];
-var colorMap = {};
-var isClickAllowed = true;
-var currentFrets = 0;
-var keytone = '';
+let btnIdArr = [];
+let strBtnId = [];
+let currentTuning = [];
+let currentScale = [];
+let scalesArr = [];
+let tuningsArr = [];
+let scalesArrVal = [];
+let tuningsArrVal = [];
+let fretBoard = [[]];
+let savedTones = [];
+let colorMap = {};
+let isClickAllowed = true;
+let currentFrets = 0;
+let keytone = '';
+const NO_KEYTONE = 'No keytone';
 const DEFAULT_GRAY = '#F6F6F6';
 const DEFAULT_RGB = 'rgb(246, 246, 246)';
 const MAX_STR = 9;
@@ -43,7 +44,7 @@ const G_SHARP = "G#/Ab";
 
 const TONES_ARR = [A,B_FLAT,B,C,C_SHARP,D,D_SHARP,E,F,F_SHARP,G,G_SHARP];
 
-const KEYTONES_ARR = ["No keytone",A,B_FLAT,B,C,C_SHARP,D,D_SHARP,E,F,F_SHARP,G,G_SHARP];
+const KEYTONES_ARR = [NO_KEYTONE,A,B_FLAT,B,C,C_SHARP,D,D_SHARP,E,F,F_SHARP,G,G_SHARP];
 
 const SCALES_MAP = {
   "No scale": [],
@@ -570,19 +571,19 @@ $(function () {
   $('#key').on('selectmenuchange', function () {
     keytone = this.value;
     savedTones = [];
-    if (keytone !== 'No keytone' && currentScale.length === 0) {
+    if (keytone !== NO_KEYTONE && currentScale.length === 0) {
       updateKey(keytone);
       resetScale();
       updateButton(keytone, '#FFFF00');
       isClickAllowed = false;
-    } else if (keytone !== 'No keytone' && currentScale.length !== 0) {
-      var newScale = getModifiedDictKey(SCALES_MAP, currentScale, keytone);
+    } else if (keytone !== NO_KEYTONE && currentScale.length !== 0) {
+      let newScale = getModifiedDictKey(SCALES_MAP, currentScale, keytone);
       currentScale = SCALES_MAP[newScale];
       updateKey(keytone);
       updateScale();
       $('#scales').val(newScale);
       $('#scales').selectmenu('refresh');
-    } else if (keytone === 'No keytone' && currentScale.length === 0) {
+    } else if (keytone === NO_KEYTONE && currentScale.length === 0) {
       initScalesStart();
       resetScale();
       isClickAllowed = true;
@@ -596,8 +597,8 @@ $(function () {
 });
 
 function isContains(note, myArray) {
-  var retVal = false;
-  for (var i = 0; i < myArray.length; i++) {
+  let retVal = false;
+  for (let i = 0; i < myArray.length; i++) {
     if (myArray[i] === note) {
       retVal = true;
       break;
@@ -607,8 +608,8 @@ function isContains(note, myArray) {
 }
 
 function getDictKey(dict, val) {
-  var retVal = '';
-  for (var key in dict) {
+  let retVal = '';
+  for (let key in dict) {
     if (dict[key] === val) {
       retVal = key;
       break;
@@ -618,7 +619,7 @@ function getDictKey(dict, val) {
 }
 
 function getModifiedDictKey(dict, val, keyTone) {
-  var retVal = getDictKey(dict, val);
+  let retVal = getDictKey(dict, val);
   if (retVal.charAt(1) === ' ') {
     retVal = retVal.replace(retVal.charAt(0), keyTone);
   } else {
@@ -628,29 +629,29 @@ function getModifiedDictKey(dict, val, keyTone) {
 }
 
 function getNewKeyTone(retVal) {
-  var newRetVal = '';
-  for (var i = 0; i < MAX_NOTE_LEN; i++) {
+  let newRetVal = '';
+  for (let i = 0; i < MAX_NOTE_LEN; i++) {
     newRetVal += retVal.charAt(i);
   }
   return newRetVal;
 }
 
 function setBtnEvent() {
-  for (var i = 0; i < btnIdArr.length; i++) {
+  for (let i = 0; i < btnIdArr.length; i++) {
     document.getElementById(btnIdArr[i]).onclick = clickButton;
   }
 }
 
 function setCookie(scaleIndex, tuningsIndex, fretsIndex, savedTones, keytoneIndex) {
   document.cookie = '';
-  var sb = [];
+  let sb = [];
   sb[0] = scaleIndex;
   sb[1] = tuningsIndex;
   sb[2] = fretsIndex;
   sb[3] = keytoneIndex;
-  var index = 4;
+  let index = 4;
   if (savedTones !== undefined && savedTones.length > 0) {
-    for (var i = 0; i < savedTones.length; i++) {
+    for (let i = 0; i < savedTones.length; i++) {
       sb[index] = savedTones[i];
       index++;
     }
@@ -659,7 +660,7 @@ function setCookie(scaleIndex, tuningsIndex, fretsIndex, savedTones, keytoneInde
 }
 
 function setColor(btnId, note) {
-  var len = currentScale.length;
+  let len = currentScale.length;
   switch (len) {
     case 2:
       document.getElementById(btnId).style.backgroundColor = CHORD5_COLOR_ARR[currentScale.indexOf(note)];
@@ -702,7 +703,7 @@ function initScales(tone) {
   $('#scales').find('option').remove().end();
   $('#scales').selectmenu('destroy').selectmenu({ style: 'dropdown' });
   $('#scales').append($('<option></option>').attr('value', scalesArr[0]).text(scalesArr[0]));
-  for (var i = 1; i < scalesArr.length; i++) {
+  for (let i = 1; i < scalesArr.length; i++) {
     if (tone.length === 1) {
       if (tone === scalesArr[i].charAt(0) && scalesArr[i].charAt(1) === ' ') {
         $('#scales').append($('<option></option>').attr('value', scalesArr[i]).text(scalesArr[i]));
@@ -719,8 +720,8 @@ function initScales(tone) {
 }
 
 function initGlobal() {
-  var decodedCookie = decodeURIComponent(document.cookie);
-  var cookies = decodedCookie.split(',');
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let cookies = decodedCookie.split(',');
   if (cookies !== undefined && cookies.length === 4) {
     initGUISearchPanels(Number(cookies[0]), Number(cookies[1]), Number(cookies[2]), Number(cookies[3]));
     initDefault();
@@ -750,8 +751,8 @@ function initWithKeytone(scaleIndex, keytoneIndex) {
 
 function initRestoreSavedTones() {
   if (savedTones.length > 0) {
-    for (var i = 0; i < savedTones.length; i++) {
-      for (var j = 0; j < btnIdArr.length; j++) {
+    for (let i = 0; i < savedTones.length; i++) {
+      for (let j = 0; j < btnIdArr.length; j++) {
         if (document.getElementById(btnIdArr[j]).value === savedTones[i]) {
           document.getElementById(btnIdArr[j]).style.backgroundColor = colorMap[savedTones[i]];
         }
@@ -761,7 +762,7 @@ function initRestoreSavedTones() {
 }
 
 function initSelectList(element, arr) {
-  for (var i = 0; i < arr.length; i++) {
+  for (let i = 0; i < arr.length; i++) {
     $(element).append($('<option></option>').attr('value', arr[i]).text(arr[i]));
   }
   $(element).selectmenu().selectmenu('menuWidget').addClass('overflow');
@@ -769,7 +770,7 @@ function initSelectList(element, arr) {
 }
 
 function initColorMap() {
-  for (var i = 0; i < TONES_ARR.length; i++) {
+  for (let i = 0; i < TONES_ARR.length; i++) {
     colorMap[TONES_ARR[i]] = TONE_COLOR_ARR[i];
   }
 }
@@ -790,7 +791,7 @@ function initGUISearchPanels(scaleIndex, tuningsIndex, fretsIndex, keytoneIndex)
 }
 
 function initSavedToneFromCookie(cookies) {
-  for (var i = 4; i < cookies.length; i++) {
+  for (let i = 4; i < cookies.length; i++) {
     savedTones.push(cookies[i]);
   }
 }
@@ -804,16 +805,16 @@ function initDefault() {
 }
 
 function initFretBoard(tones, tuning, frets) {
-  var strings = tuning.length;
+  let strings = tuning.length;
   frets++;
-  var fretboard = initFretBoardMatrix();
-  for (var i = 0; i < MAX_STR; i++) {
+  let fretboard = initFretBoardMatrix();
+  for (let i = 0; i < MAX_STR; i++) {
     if (i < strings) {
       fretboard[i][0] = tuning[i];
     }
-    var startToneIndex = tones.indexOf(fretboard[i][0]);
+    let startToneIndex = tones.indexOf(fretboard[i][0]);
     startToneIndex++;
-    for (var j = 1; j < MAX_FRETS; j++) {
+    for (let j = 1; j < MAX_FRETS; j++) {
       if (startToneIndex >= 12) {
         startToneIndex = 0;
       }
@@ -829,10 +830,10 @@ function initFretBoard(tones, tuning, frets) {
 }
 
 function initFretBoardMatrix() {
-  var arr = [];
-  for (var i = 0; i < MAX_STR; i++) {
+  let arr = [];
+  for (let i = 0; i < MAX_STR; i++) {
     arr[i] = [];
-    for (var j = 0; j < MAX_FRETS; j++) {
+    for (let j = 0; j < MAX_FRETS; j++) {
       arr[i][j] = '';
     }
   }
@@ -840,8 +841,8 @@ function initFretBoardMatrix() {
 }
 
 function initScale() {
-  for (var i = 0; i < btnIdArr.length; i++) {
-    var note = document.getElementById(btnIdArr[i]).value;
+  for (let i = 0; i < btnIdArr.length; i++) {
+    let note = document.getElementById(btnIdArr[i]).value;
     if (isContains(note, currentScale) && !document.getElementById(btnIdArr[i]).hidden) {
       setColor(btnIdArr[i], note);
     }
@@ -861,8 +862,8 @@ function updateKey(tone) {
 }
 
 function updateButton(target, color) {
-  for (var i = 0; i < btnIdArr.length; i++) {
-    var note = document.getElementById(btnIdArr[i]).value;
+  for (let i = 0; i < btnIdArr.length; i++) {
+    let note = document.getElementById(btnIdArr[i]).value;
     if (note === target) {
       if (document.getElementById(btnIdArr[i]).style.backgroundColor === DEFAULT_RGB) {
         if (color.length === 0) {
@@ -894,11 +895,11 @@ function updateProgram() {
 }
 
 function updateScale() {
-  if (currentScale.length === 0 && keytone === 'No keytone') {
+  if (currentScale.length === 0 && keytone === NO_KEYTONE) {
     resetScale();
     hideLegendBtn();
     isClickAllowed = true;
-  } else if (currentScale.length === 0 && keytone !== 'No keytone') {
+  } else if (currentScale.length === 0 && keytone !== NO_KEYTONE) {
     resetScale();
     hideLegendBtn();
     updateButton(keytone, '#FFFF00');
@@ -912,9 +913,9 @@ function updateScale() {
 }
 
 function updateButtons() {
-  var btnId = 0;
-  for (var i = 0; i < MAX_STR; i++) {
-    for (var j = 0; j < MAX_FRETS + 1; j++) {
+  let btnId = 0;
+  for (let i = 0; i < MAX_STR; i++) {
+    for (let j = 0; j < MAX_FRETS + 1; j++) {
       if (j > 0) {
         document.getElementById(btnIdArr[btnId]).value = fretBoard[i][j - 1];
       }
@@ -924,11 +925,11 @@ function updateButtons() {
 }
 
 function updateLegendBtn() {
-  var len = currentScale.length;
+  let len = currentScale.length;
   if (len > 0) {
     document.getElementById('legendButtons').hidden = false;
-    for (var i = 0; i < 7; i++) {
-      var btn = 'buttonLegend'.concat('', i);
+    for (let i = 0; i < 7; i++) {
+      let btn = 'buttonLegend'.concat('', i + '');
       if (i < len) {
         document.getElementById(btn).hidden = false;
         document.getElementById(btn).value = currentScale[i];
@@ -945,7 +946,7 @@ function updateLegendBtn() {
 }
 
 function resetScale() {
-  for (var i = 0; i < btnIdArr.length; i++) {
+  for (let i = 0; i < btnIdArr.length; i++) {
     if (!document.getElementById(btnIdArr[i]).disabled) {
       document.getElementById(btnIdArr[i]).style.backgroundColor = DEFAULT_GRAY;
     }
@@ -954,7 +955,7 @@ function resetScale() {
 
 function resetFretboard() {
   document.cookie = '';
-  location.reload(true);
+  location.reload();
 }
 
 function clearFretboard() {
@@ -967,19 +968,15 @@ function clearFretboard() {
   keytone = KEYTONES_ARR[0];
   $('#scales').val(scalesArr[0]);
   $('#scales').selectmenu('refresh');
-  $('#key').val('No keytone');
+  $('#key').val(NO_KEYTONE);
   $('#key').selectmenu('refresh');
   savedTones = [];
   setCookie(0, tuningsArrVal.indexOf(currentTuning), FRET_WIRES_ARR.indexOf(currentFrets), savedTones, KEYTONES_ARR.indexOf(keytone));
 }
 
 function checkButtons() {
-  for (var i = 0; i < btnIdArr.length; i++) {
-    if (document.getElementById(btnIdArr[i]).value === '') {
-      document.getElementById(btnIdArr[i]).hidden = true;
-    } else {
-      document.getElementById(btnIdArr[i]).hidden = false;
-    }
+  for (let i = 0; i < btnIdArr.length; i++) {
+    document.getElementById(btnIdArr[i]).hidden = document.getElementById(btnIdArr[i]).value === '';
   }
 }
 
@@ -990,7 +987,7 @@ function checkUserInfo() {
 
 function clickButton(e) {
   e = e || window.event;
-  var target = e.target.value;
+  let target = e.target.value;
   if (isClickAllowed) {
     updateSavedTones(target);
     updateButton(target, '');
@@ -999,12 +996,12 @@ function clickButton(e) {
 }
 
 function createFretBoard() {
-  var btnId = 0;
+  let btnId = 0;
   createFretBtn();
   createLegendBtn();
   disablerFretBtn();
   hideLegendBtn();
-  for (var i = 0; i < MAX_STR; i++) {
+  for (let i = 0; i < MAX_STR; i++) {
     $('#pageButtons').append('<div>');
     btnId = createNoteBtnRow(i, btnId);
     $('#pageButtons').append('</div>');
@@ -1013,7 +1010,7 @@ function createFretBoard() {
 }
 
 function getBtn(style, btnId, row, i) {
-  var retVal = '<input type="button" tabindex="-1" ';
+  let retVal = '<input type="button" tabindex="-1" ';
   switch (style) {
     case 'tuning':
       retVal += 'style="font-weight:bold;border:none;background-color:Transparent;text-align:center;height:30px;border-style:none;margin-bottom:2px;margin-right:10px;" id="button' + btnId + '" value="' + (row + 1) + ' -';
@@ -1035,7 +1032,7 @@ function getBtn(style, btnId, row, i) {
 }
 
 function createNoteBtnRow(row, btnId) {
-  for (var i = 0; i < MAX_FRETS + 1; i++) {
+  for (let i = 0; i < MAX_FRETS + 1; i++) {
     if (i === 0) {
       $('#pageButtons').append(getBtn('tuning', btnId, row, i));
       strBtnId.push('button'.concat('', btnId));
@@ -1050,20 +1047,20 @@ function createNoteBtnRow(row, btnId) {
 
 function createLegendBtn() {
   $('#legendButtons').append('<strong>Sequence: </strong>');
-  for (var i = 0; i < 7; i++) {
+  for (let i = 0; i < 7; i++) {
     $('#legendButtons').append(getBtn('legend', 0, 0, i));
   }
 }
 
 function createFretBtn() {
-  for (var i = 0; i < MAX_FRETS + 1; i++) {
+  for (let i = 0; i < MAX_FRETS + 1; i++) {
     $('#fretsButtons').append(getBtn('fret', 0, 0, i));
   }
 }
 
 function hideLegendBtn() {
-  for (var i = 0; i < 7; i++) {
-    var btn = 'buttonLegend'.concat('', i);
+  for (let i = 0; i < 7; i++) {
+    let btn = 'buttonLegend'.concat('', i + '');
     document.getElementById(btn).hidden = true;
     document.getElementById(btn).style.backgroundColor = DEFAULT_GRAY;
     document.getElementById(btn).value = '';
@@ -1072,38 +1069,30 @@ function hideLegendBtn() {
 }
 
 function disablerFretBtn() {
-  for (var i = 0; i < MAX_FRETS + 1; i++) {
-    document.getElementById('buttonFret'.concat('', i)).disabled = true;
+  for (let i = 0; i < MAX_FRETS + 1; i++) {
+    document.getElementById('buttonFret'.concat('', i + '')).disabled = true;
     if (i - 1 === -1) {
-      document.getElementById('buttonFret'.concat('', i)).value = '';
+      document.getElementById('buttonFret'.concat('', i + '')).value = '';
     }
   }
 }
 
 function disablerStrBtn() {
-  for (var i = 0; i < strBtnId.length; i++) {
+  for (let i = 0; i < strBtnId.length; i++) {
     document.getElementById(strBtnId[i]).disabled = true;
   }
 }
 
 function enablerStrBtn() {
-  for (var i = 0; i < strBtnId.length; i++) {
-    if (i < currentTuning.length) {
-      document.getElementById(strBtnId[i]).hidden = false;
-    } else {
-      document.getElementById(strBtnId[i]).hidden = true;
-    }
+  for (let i = 0; i < strBtnId.length; i++) {
+    document.getElementById(strBtnId[i]).hidden = i >= currentTuning.length;
   }
 }
 
 function enablerFretBtn() {
-  var end = currentFrets;
+  let end = currentFrets;
   end++;
-  for (var i = 0; i < MAX_FRETS + 1; i++) {
-    if (i <= end) {
-      document.getElementById('buttonFret'.concat('', i)).hidden = false;
-    } else {
-      document.getElementById('buttonFret'.concat('', i)).hidden = true;
-    }
+  for (let i = 0; i < MAX_FRETS + 1; i++) {
+    document.getElementById('buttonFret'.concat('', i + '')).hidden = i > end;
   }
 }
