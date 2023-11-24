@@ -518,20 +518,20 @@ const SCALES_MAP = {
 };
 
 const TUNING_MAP = {
-  "E A D g": [G,D,A,E],
-  "G C A e": [E,A,C,G],
-  "B E A D g": [G,D,A,E,B],
-  "E A D G B e": [E,B,G,D,A,E],
-  "D A D G B e": [E,B,G,D,A,D],
-  "C G C F A d": [D,A,F,C,G,C],
-  "D G D G B d": [D,B,G,D,G,D],
-  "C# G# C# F# Bb d#": [D_SHARP,B_FLAT,F_SHARP,C_SHARP,G_SHARP,C_SHARP],
-  "D# G# C# F# Bb d#": [D_SHARP,B_FLAT,F_SHARP,C_SHARP,G_SHARP,D_SHARP],
-  "B E A D G B e": [E,B,G,D,A,E,B],
-  "A E A D G B e": [E,B,G,D,A,E,A],
-  "F# B E A D G B e": [E,B,G,D,A,E,B,F_SHARP],
-  "G D G C F Bb D g": [G,D,B_FLAT,F,C,G,D,G],
-  "C# F# B E A D G B e": [E,B,G,D,A,E,B,F_SHARP,C_SHARP]
+  "E-A-D-g": [G,D,A,E],
+  "G-C-A-e": [E,A,C,G],
+  "B-E-A-D-g": [G,D,A,E,B],
+  "E-A-D-G-B-e": [E,B,G,D,A,E],
+  "D-A-D-G-B-e": [E,B,G,D,A,D],
+  "C-G-C-F-A-d": [D,A,F,C,G,C],
+  "D-G-D-G-B-d": [D,B,G,D,G,D],
+  "C#-G#-C#-F#-Bb-d#": [D_SHARP,B_FLAT,F_SHARP,C_SHARP,G_SHARP,C_SHARP],
+  "D#-G#-C#-F#-Bb-d#": [D_SHARP,B_FLAT,F_SHARP,C_SHARP,G_SHARP,D_SHARP],
+  "B-E-A-D-G-B-e": [E,B,G,D,A,E,B],
+  "A-E-A-D-G-B-e": [E,B,G,D,A,E,A],
+  "F#-B-E-A-D-G-B-e": [E,B,G,D,A,E,B,F_SHARP],
+  "G-D-G-C-F-Bb-D-g": [G,D,B_FLAT,F,C,G,D,G],
+  "C#-F#-B-E-A-D-G-B-e": [E,B,G,D,A,E,B,F_SHARP,C_SHARP]
 }
 
 $(function () {
