@@ -1,5 +1,4 @@
 'use strict';
-
 $(function () {
   scalesArr = Object.keys(SCALES_MAP);
   tuningsArr = Object.keys(TUNING_MAP);

@@ -1,5 +1,4 @@
 'use strict';
-
 let btnIdArr = [];
 let strBtnId = [];
 let currentTuning = [];
@@ -26,10 +25,8 @@ const PENTA_COLOR_ARR = ['#FFFF00', '#E1F23E', '#C3E67D', '#A5DABB', '#87CEFA'];
 const CHORD7_COLOR_ARR = ['#FFFF00', '#D7EE53', '#AFDEA6', '#87CEFA'];
 const CHORD_COLOR_ARR = ['#FFFF00', '#C3E67D', '#87CEFA'];
 const CHORD5_COLOR_ARR = ['#FFFF00', '#87CEFA'];
-
 const MAX_NOTE_LEN = 5;
 const FRET_WIRES_ARR = ["12", "18", "21", "22", "24", "27"];
-
 const A = "A";
 const B_FLAT = "A#/Bb";
 const B = "B";
@@ -42,11 +39,24 @@ const F = "F";
 const F_SHARP = "F#/Gb";
 const G = "G";
 const G_SHARP = "G#/Ab";
-
 const TONES_ARR = [A,B_FLAT,B,C,C_SHARP,D,D_SHARP,E,F,F_SHARP,G,G_SHARP];
-
 const KEYTONES_ARR = [NO_KEYTONE,A,B_FLAT,B,C,C_SHARP,D,D_SHARP,E,F,F_SHARP,G,G_SHARP];
-
+const TUNING_MAP = {
+    "E-A-D-g": [G,D,A,E],
+    "G-C-A-e": [E,A,C,G],
+    "B-E-A-D-g": [G,D,A,E,B],
+    "E-A-D-G-B-e": [E,B,G,D,A,E],
+    "D-A-D-G-B-e": [E,B,G,D,A,D],
+    "C-G-C-F-A-d": [D,A,F,C,G,C],
+    "D-G-D-G-B-d": [D,B,G,D,G,D],
+    "C#-G#-C#-F#-Bb-d#": [D_SHARP,B_FLAT,F_SHARP,C_SHARP,G_SHARP,C_SHARP],
+    "D#-G#-C#-F#-Bb-d#": [D_SHARP,B_FLAT,F_SHARP,C_SHARP,G_SHARP,D_SHARP],
+    "B-E-A-D-G-B-e": [E,B,G,D,A,E,B],
+    "A-E-A-D-G-B-e": [E,B,G,D,A,E,A],
+    "F#-B-E-A-D-G-B-e": [E,B,G,D,A,E,B,F_SHARP],
+    "G-D-G-C-F-Bb-D-g": [G,D,B_FLAT,F,C,G,D,G],
+    "C#-F#-B-E-A-D-G-B-e": [E,B,G,D,A,E,B,F_SHARP,C_SHARP]
+}
 const SCALES_MAP = {
     "No scale / chord": [],
     "A 5 Chord": [A,E],
@@ -516,22 +526,4 @@ const SCALES_MAP = {
     "G#/Ab Phrygian Scale": [G_SHARP,A,B,C_SHARP,D_SHARP,E,F_SHARP],
     "G#/Ab Doric Scale": [G_SHARP,B_FLAT,B,C_SHARP,D_SHARP,F,F_SHARP],
     "G#/Ab Hungarian Scale": [G_SHARP,B_FLAT,B,D,D_SHARP,E,G],
-
 };
-
-const TUNING_MAP = {
-    "E-A-D-g": [G,D,A,E],
-    "G-C-A-e": [E,A,C,G],
-    "B-E-A-D-g": [G,D,A,E,B],
-    "E-A-D-G-B-e": [E,B,G,D,A,E],
-    "D-A-D-G-B-e": [E,B,G,D,A,D],
-    "C-G-C-F-A-d": [D,A,F,C,G,C],
-    "D-G-D-G-B-d": [D,B,G,D,G,D],
-    "C#-G#-C#-F#-Bb-d#": [D_SHARP,B_FLAT,F_SHARP,C_SHARP,G_SHARP,C_SHARP],
-    "D#-G#-C#-F#-Bb-d#": [D_SHARP,B_FLAT,F_SHARP,C_SHARP,G_SHARP,D_SHARP],
-    "B-E-A-D-G-B-e": [E,B,G,D,A,E,B],
-    "A-E-A-D-G-B-e": [E,B,G,D,A,E,A],
-    "F#-B-E-A-D-G-B-e": [E,B,G,D,A,E,B,F_SHARP],
-    "G-D-G-C-F-Bb-D-g": [G,D,B_FLAT,F,C,G,D,G],
-    "C#-F#-B-E-A-D-G-B-e": [E,B,G,D,A,E,B,F_SHARP,C_SHARP]
-}
