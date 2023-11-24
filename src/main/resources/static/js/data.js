@@ -14,7 +14,7 @@ let colorMap = {};
 let isClickAllowed = true;
 let currentFrets = 0;
 let keytone = '';
-const NO_KEYTONE = 'No keytone';
+const NO_KEYTONE = 'No leading-tone';
 const DEFAULT_GRAY = '#F6F6F6';
 const DEFAULT_RGB = 'rgb(246, 246, 246)';
 const MAX_STR = 9;
@@ -48,7 +48,7 @@ const TONES_ARR = [A,B_FLAT,B,C,C_SHARP,D,D_SHARP,E,F,F_SHARP,G,G_SHARP];
 const KEYTONES_ARR = [NO_KEYTONE,A,B_FLAT,B,C,C_SHARP,D,D_SHARP,E,F,F_SHARP,G,G_SHARP];
 
 const SCALES_MAP = {
-    "No scale": [],
+    "No scale / chord": [],
     "A 5 Chord": [A,E],
     "A +5 Chord": [A,C_SHARP,F],
     "A 7+5 Chord": [A,C_SHARP,F,G],
