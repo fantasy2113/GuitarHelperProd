@@ -5,8 +5,8 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>de.jos</groupId>
-  <artifactId>guitar-helper-prod</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <artifactId>guitarhelper</artifactId>
+  <version>1.1</version>
 
   <properties>
     <java.version>17</java.version>
@@ -15,7 +15,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.7.18</version>
+    <version>3.2.0</version>
   </parent>
 
   <build>

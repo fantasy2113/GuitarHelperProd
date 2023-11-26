@@ -16,20 +16,20 @@ $(function () {
   setBtnEvent();
   $('#frets').on('selectmenuchange', function () {
     currentFrets = this.value;
-    setCookie(scalesArrVal.indexOf(currentScale), tuningsArrVal.indexOf(currentTuning), FRET_WIRES_ARR.indexOf(currentFrets), savedTones, KEYTONES_ARR.indexOf(keytone));
+    setCookie(scalesArrVal.indexOf(currentScale), tuningsArrVal.indexOf(currentTuning), FRET_WIRES_ARR.indexOf(currentFrets + ''), savedTones, KEYTONES_ARR.indexOf(keytone));
     updateProgram();
     initRestoreSavedTones();
   });
   $('#tunings').on('selectmenuchange', function () {
     currentTuning = TUNING_MAP[this.value];
-    setCookie(scalesArrVal.indexOf(currentScale), tuningsArrVal.indexOf(currentTuning), FRET_WIRES_ARR.indexOf(currentFrets), savedTones, KEYTONES_ARR.indexOf(keytone));
+    setCookie(scalesArrVal.indexOf(currentScale), tuningsArrVal.indexOf(currentTuning), FRET_WIRES_ARR.indexOf(currentFrets + ''), savedTones, KEYTONES_ARR.indexOf(keytone));
     updateProgram();
     initRestoreSavedTones();
   });
   $('#scales').on('selectmenuchange', function () {
     currentScale = SCALES_MAP[this.value];
     savedTones = [];
-    setCookie(scalesArrVal.indexOf(currentScale), tuningsArrVal.indexOf(currentTuning), FRET_WIRES_ARR.indexOf(currentFrets), savedTones, KEYTONES_ARR.indexOf(keytone));
+    setCookie(scalesArrVal.indexOf(currentScale), tuningsArrVal.indexOf(currentTuning), FRET_WIRES_ARR.indexOf(currentFrets + ''), savedTones, KEYTONES_ARR.indexOf(keytone));
     updateScale();
   });
   $('#key').on('selectmenuchange', function () {
@@ -56,7 +56,7 @@ $(function () {
       initScalesStart();
       initScalesEnd();
     }
-    setCookie(scalesArrVal.indexOf(currentScale), tuningsArrVal.indexOf(currentTuning), FRET_WIRES_ARR.indexOf(currentFrets), savedTones, KEYTONES_ARR.indexOf(keytone));
+    setCookie(scalesArrVal.indexOf(currentScale), tuningsArrVal.indexOf(currentTuning), FRET_WIRES_ARR.indexOf(currentFrets + ''), savedTones, KEYTONES_ARR.indexOf(keytone));
   });
 });
 
@@ -154,7 +154,7 @@ function setColor(btnId, note) {
 
 function initScalesStart() {
   $('#scales').find('option').remove().end();
-  $('#scales').selectmenu('destroy').selectmenu({ style: 'dropdown' });
+  $('#scales').selectmenu('destroy').selectmenu({style: 'dropdown'});
   initSelectList('#scales', scalesArr);
 }
 
@@ -165,7 +165,7 @@ function initScalesEnd() {
 
 function initScales(tone) {
   $('#scales').find('option').remove().end();
-  $('#scales').selectmenu('destroy').selectmenu({ style: 'dropdown' });
+  $('#scales').selectmenu('destroy').selectmenu({style: 'dropdown'});
   $('#scales').append($('<option></option>').attr('value', scalesArr[0]).text(scalesArr[0]));
   for (let i = 1; i < scalesArr.length; i++) {
     if (tone.length === 1) {
@@ -435,7 +435,7 @@ function clearFretboard() {
   $('#key').val(NO_KEYTONE);
   $('#key').selectmenu('refresh');
   savedTones = [];
-  setCookie(0, tuningsArrVal.indexOf(currentTuning), FRET_WIRES_ARR.indexOf(currentFrets), savedTones, KEYTONES_ARR.indexOf(keytone));
+  setCookie(0, tuningsArrVal.indexOf(currentTuning), FRET_WIRES_ARR.indexOf(currentFrets + ''), savedTones, KEYTONES_ARR.indexOf(keytone));
 }
 
 function checkButtons() {
@@ -456,7 +456,7 @@ function clickButton(e) {
     updateSavedTones(target);
     updateButton(target, '');
   }
-  setCookie(scalesArrVal.indexOf(currentScale), tuningsArrVal.indexOf(currentTuning), FRET_WIRES_ARR.indexOf(currentFrets), savedTones, KEYTONES_ARR.indexOf(keytone));
+  setCookie(scalesArrVal.indexOf(currentScale), tuningsArrVal.indexOf(currentTuning), FRET_WIRES_ARR.indexOf(currentFrets + ''), savedTones, KEYTONES_ARR.indexOf(keytone));
 }
 
 function createFretBoard() {
