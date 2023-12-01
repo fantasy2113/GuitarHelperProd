@@ -417,11 +417,6 @@ function resetScale() {
   }
 }
 
-function resetFretboard() {
-  document.cookie = '';
-  location.reload();
-}
-
 function clearFretboard() {
   initScalesStart();
   initScalesEnd();
