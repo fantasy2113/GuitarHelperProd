@@ -2,6 +2,6 @@
 .gradle/**
 build/**
 gradle/**
-*.log
-todoapp.iml
+**.log
+**.iml
 target/**
