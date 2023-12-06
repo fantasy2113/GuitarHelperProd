@@ -1,4 +1,4 @@
-package de.jos.guitarhelper;
+package de.jos.guitarHelperApp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Guitar(helper) 1.1</title>
+  <title>Guitar(helper) 1.2</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="description" content="Free Web-App">
   <meta name="keywords" content="Guitar,Fretboard,Guitar Fretboard, pentatonic, chords, scale, scales">
@@ -14,21 +14,25 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.theme.min.css"/>
   <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script src="js/data.js?version=5" type="text/javascript"></script>
-  <script src="js/app.js?version=70" type="text/javascript"></script>
+  <script src="js/app.js?version=77" type="text/javascript"></script>
 </head>
-<body bgcolor="#FFFFFF">
+<body bgcolor="#FFFFFF" id="main">
 <div class="demo">
   <form action="#">
     <fieldset>
       <select name="tunings" id="tunings"></select>
       <select name="frets" id="frets"></select>
-      <input type="button" value="Clear"
+      <input type="button" value="&#9114;"
              style="height:31px;width:70px;font-size:17px;border:solid;border-radius:3px;border-width:1px;border-color:#C5C5C5;background-color:#F6F6F6;"
              onclick="clearFretboard();"/>
       <br>
       <select name="key" id="key"></select>
       <select name="scales" id="scales"></select>
+      <input type="button" value="&#128247;"
+             style="height:31px;width:70px;font-size:17px;border:solid;border-radius:3px;border-width:1px;border-color:#C5C5C5;background-color:#F6F6F6;"
+             onclick="downloadScreenshot();"/>
     </fieldset>
   </form>
   <form id="fretboard">

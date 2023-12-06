@@ -555,3 +555,15 @@ function enablerFretBtn() {
     document.getElementById('buttonFret'.concat('', i + '')).hidden = i > end;
   }
 }
+
+function downloadScreenshot() {
+  html2canvas(document.getElementById("main"), {allowTaint: true, useCORS: true,})
+      .then(function (canvas) {
+        const link = document.createElement("a");
+        link.href = canvas.toDataURL();
+        link.download = scalesArr[scalesArrVal.indexOf(currentScale)] + "_" + tuningsArr[tuningsArrVal.indexOf(currentTuning)] + ".png";
+        link.click();
+      }).catch((e) => {
+        console.log(e);
+      });
+}

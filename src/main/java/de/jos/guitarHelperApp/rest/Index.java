@@ -1,4 +1,4 @@
-package de.jos.guitarhelper.rest;
+package de.jos.guitarHelperApp.rest;
 
 import org.springframework.web.bind.annotation.RestController;
 
