@@ -1,4 +1,37 @@
-﻿.button {
+﻿.tuning {
+  font-weight: bold;
+  border: none;
+  background-color: Transparent;
+  text-align: center;
+  height: 30px;
+  border-style: none;
+  margin-bottom: 2px;
+  margin-right: 10px;
+}
+
+.note {
+  font-weight: bold;
+  text-align: center;
+  height: 30px;
+  width: 50px;
+  margin-bottom: 2px;
+  margin-right: 2px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #C5C5C5;
+  background-color: #F6F6F6;
+}
+
+.legend {
+  font-weight: bold;
+  border: none;
+  text-align: center;
+  height: 30px;
+  width: 50px;
+  border-style: none;
+}
+
+.fret {
   font-weight: bold;
   border: none;
   background-color: Transparent;
@@ -7,26 +40,5 @@
   width: 50px;
   border-style: none;
   margin-bottom: 2px;
-  margin-right: 10px;
-}
-
-.button1 {
-  background-color: #4CAF50;
-}
-
-.button2 {
-  background-color: #008CBA;
-}
-
-.button3 {
-  background-color: #f44336;
-}
-
-.button4 {
-  background-color: #e7e7e7;
-  color: black;
-}
-
-.button5 {
-  background-color: #555555;
+  margin-right: 2px;
 }

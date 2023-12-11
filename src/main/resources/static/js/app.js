@@ -472,16 +472,16 @@ function getBtn(style, btnId, row, i) {
   let retVal = '<input type="button" tabindex="-1" ';
   switch (style) {
     case 'tuning':
-      retVal += 'style="font-weight:bold;border:none;background-color:Transparent;text-align:center;height:30px;border-style:none;margin-bottom:2px;margin-right:10px;" id="button' + btnId + '" value="' + (row + 1) + ' -';
+      retVal += 'class="tuning" id="button' + btnId + '" value="' + (row + 1) + ' -';
       break;
     case 'note':
-      retVal += 'style="font-weight:bold;text-align:center;height:30px;width:50px;margin-bottom:2px;margin-right:2px;border-style:solid;border-width:1px;border-color:#C5C5C5;background-color:#F6F6F6;" id="button' + btnId + '" value="' + fretBoard[row][i - 1];
+      retVal += 'class="note" id="button' + btnId + '" value="' + fretBoard[row][i - 1];
       break;
     case 'legend':
-      retVal += 'style="font-weight:bold;border:none;text-align:center;height:30px;width:50px;border-style:none;" id="buttonLegend' + i + '" value="' + i;
+      retVal += 'class="legend" id="buttonLegend' + i + '" value="' + i;
       break;
     case 'fret':
-      retVal += 'style="font-weight:bold;border:none;background-color:Transparent;text-align:center;height:30px;width:50px;border-style:none;margin-bottom:2px;margin-right:2px;" id="buttonFret' + i + '" value="' + (i - 1);
+      retVal += 'class="fret" id="buttonFret' + i + '" value="' + (i - 1);
       break;
     default:
       retVal += 'value="';
