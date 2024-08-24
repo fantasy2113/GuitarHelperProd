@@ -10,7 +10,6 @@ let tuningsArrVal = [];
 let fretBoard = [[]];
 let savedTones = [];
 let colorMap = {};
-let isClickAllowed = true;
 let currentFrets = 0;
 let keytone = '';
 const NO_KEYTONE = 'No leading-tone';
